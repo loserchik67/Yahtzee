@@ -5,8 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yahtzee</title>
-    <link> rel="shortcut icon"  href="dice.png" type="png"</link>
-    <link> rel="stylesheet" href="style.css" </link>
+    <link rel="shortcut icon" href="dice.png" type="png" />
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <main>
+      <div class="container">
+        <div class="top">
+          <img src="Yahtzee.png" alt="Game Name" class="center vh-15" />
+        </div>
+        <div class="middle">
+          <button class="button column newGame hidden" id="new">
+            New Game
+          </button>
+          <p class="start column">To start the game press roll!</p>
+          <div class="row">
+            <div class="dice1">
+              <img src="dice-1.png" id="dice1img" class="dice" />
+              <button class="button hold" id="hold1">hold</button>
+            </div>
+            <div class="dice2">
+              <img src="dice-2.png" id="dice2img" class="dice" />
+              <button class="button hold" id="hold2">hold</button>
+            </div>
+            <div class="dice3">
+              <img src="dice-3.png" id="dice3img" class="dice" />
+              <button class="button hold" id="hold3">hold</button>
+            </div>
+            <div class="dice4">
+              <img src="dice-4.png" id="dice4img" class="dice" />
+              <button class="button hold" id="hold4">hold</button>
+            </div>
+            <div class="dice5">
+              <img src="dice-5.png" id="dice5img" class="dice" />
+              <button class="button hold roll" id="hold5">hold</button>
+            </div>
+          </div>
+
+          <button class="button column roll bottom" id="roll">Roll</button>
+        </div>
+        <div class="bottom"></div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>

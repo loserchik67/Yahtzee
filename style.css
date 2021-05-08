@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: inherit; */
+}
+
+html {
+  font-size: 62.5%;
+  /* box-sizing: border-box; */
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(to top left, #d6152f 0%, #490cd6 100%);
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.middle {
+  flex: 10;
+}
+
+.bottom {
+  flex: 75;
+}
+
+/* .middle {
+    outline: solid 1px #ccc;
+}
+.top {
+  outline: solid 1px #ccc;
+}
+.bottom {
+  outline: solid 1px #ccc; 
+}*/
+
+.container > div {
+  position: relative;
+}
+body {
+  margin: 0;
+}
+/* .container > div::after {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translateY(-50%);
+  color: white;
+  display: block;
+  font-family: sans-serif;
+} */
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 800;
+  transition: all 0.2s;
+
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  filter: drop-shadow(5px 5px 5px #0000008a);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+}
+
+.dice {
+  height: 10rem;
+  padding: 15px;
+  padding-top: 35px;
+  padding-bottom: 10px;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.column {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.hold {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.newGame {
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.roll {
+  filter: drop-shadow(5px 5px 5px #000000d3);
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.start {
+  font-size: 30px;
+}
