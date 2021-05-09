@@ -79,6 +79,8 @@ const unhold = function () {
 btnNewGame.addEventListener('click', function () {
   rollCount = 0;
   unhold();
+  startMessage.classList.remove('hidden');
+  btnNewGame.classList.add('hidden');
 });
 
 btnRoll.addEventListener('click', function () {
