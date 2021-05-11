@@ -6,7 +6,6 @@
 
 html {
   font-size: 62.5%;
-  /* box-sizing: border-box; */
 }
 
 body {
@@ -14,7 +13,6 @@ body {
   font-weight: 400;
   color: rgb(255, 255, 255);
   background-image: linear-gradient(to top left, #d6152f 0%, #490cd6 100%);
-  /* display: flex; */
   align-items: center;
   justify-content: center;
 }
@@ -36,9 +34,9 @@ body {
 .bottom {
   flex: 75;
 }
-/* 
-.middle {
-  outline: solid 1px #ccc;
+
+/* .middle {
+  outline: solid 1px rgb(236, 46, 46);
 }
 .middle2 {
   outline: solid 1px #ccc;
@@ -47,8 +45,8 @@ body {
   outline: solid 1px #ccc;
 }
 .bottom {
-  outline: solid 1px #ccc;
-} */
+  outline: solid 1px #ccc; 
+}*/
 
 .container > div {
   position: relative;
@@ -71,7 +69,7 @@ body {
   background: none;
   border: none;
   font-family: inherit;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   cursor: pointer;
   font-weight: 800;
@@ -87,10 +85,14 @@ body {
 }
 
 .dice {
-  height: 10rem;
+  height: 8rem;
   padding: 15px;
   padding-top: 15px;
   padding-bottom: 10px;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.yahtzee {
   filter: drop-shadow(5px 5px 5px #0000008a);
 }
 
@@ -152,4 +154,107 @@ body {
 
 .hidden {
   display: none;
+}
+
+.button2 {
+  color: #444;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 800;
+  transition: all 0.2s;
+
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  filter: drop-shadow(5px 5px 5px #0000008a);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+}
+
+.type {
+  font-size: 30px;
+  text-align: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.score {
+  font-size: 30px;
+  text-align: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+  padding-bottom: 15px;
+}
+
+.scoreimages {
+  padding: 5px;
+  padding-bottom: 10px;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.total-score-text {
+  padding-top: 20px;
+  font-size: 50px;
+  text-align: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.total-score-text2 {
+  padding-top: 5px;
+  font-size: 50px;
+  text-align: center;
+  filter: drop-shadow(5px 5px 5px #0000008a);
+}
+
+.ones {
+  padding: 15px;
+}
+
+.twos {
+  padding: 15px;
+}
+
+.threes {
+  padding: 15px;
+}
+
+.fours {
+  padding: 15px;
+}
+
+.fives {
+  padding: 15px;
+}
+
+.sixes {
+  padding: 15px;
+}
+
+.bonus {
+  padding: 15px;
+}
+
+.three-of-a-kind {
+  padding: 15px;
+}
+.four-of-a-kind {
+  padding: 15px;
+}
+.full-house {
+  padding: 15px;
+}
+.small-straight {
+  padding: 15px;
+}
+.large-straight {
+  padding: 15px;
+}
+.yahtzee {
+  padding: 15px;
+}
+.chance {
+  padding: 15px;
 }
