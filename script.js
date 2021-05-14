@@ -2,17 +2,21 @@
 
 const btnRoll = document.getElementById('roll');
 const btnNewGame = document.getElementById('new');
+const startMessage = document.querySelector('.start');
+
+//hold buttons
 const btnHold1 = document.getElementById('hold1');
 const btnHold2 = document.getElementById('hold2');
 const btnHold3 = document.getElementById('hold3');
 const btnHold4 = document.getElementById('hold4');
 const btnHold5 = document.getElementById('hold5');
+
+//dice
 const diceEl1 = document.getElementById('dice1img');
 const diceEl2 = document.getElementById('dice2img');
 const diceEl3 = document.getElementById('dice3img');
 const diceEl4 = document.getElementById('dice4img');
 const diceEl5 = document.getElementById('dice5img');
-const startMessage = document.querySelector('.start');
 
 //submit buttons
 const btnOnes = document.getElementById('btnOnes');
@@ -22,6 +26,14 @@ const btnFourss = document.getElementById('btnFours');
 const btnFives = document.getElementById('btnFives');
 const btnSixes = document.getElementById('btnSixes');
 
+const btnThreeKind = document.getElementById('btnThreeKind');
+const btnFourKind = document.getElementById('btnFourKind');
+const btnFullHouse = document.getElementById('btnFullHouse');
+const btnSmStraight = document.getElementById('btnSmStraight');
+const btnLgStraight = document.getElementById('btnLgStraight');
+const btnYahtzee = document.getElementById('btnYahtzee');
+const btnChance = document.getElementById('btnChance');
+
 //score trackers
 let oneScore = 0;
 let twoScore = 0;
@@ -29,13 +41,34 @@ let threeScore = 0;
 let fourScore = 0;
 let fiveScore = 0;
 let sixScore = 0;
+let bonusScore = 0;
 let totalScore = 0;
+
+let threeKindScore = 0;
+let fourKindScore = 0;
+let fullHouseScore = 0;
+let smStraightScore = 0;
+let lgStraightScore = 0;
+let yahtzeeScore = 0;
+let chanceScore = 0;
+
+//submit buttons
 let oneSubmit = false;
 let twoSubmit = false;
 let threeSubmit = false;
 let fourSubmit = false;
 let fiveSubmit = false;
 let sixSubmit = false;
+
+let threeKindSubmit = false;
+let fourKindSubmit = false;
+let fullHouseSubmit = false;
+let smStraightSubmit = false;
+let lgStraightSubmit = false;
+let yahtzeeSubmit = false;
+let chanceSubmit = false;
+
+//score texts
 const totalScoreText = document.querySelector('.total-score-text2');
 const onesText = document.getElementById('ones-score');
 const twosText = document.getElementById('twos-score');
@@ -43,6 +76,19 @@ const threesText = document.getElementById('threes-score');
 const foursText = document.getElementById('fours-score');
 const fivesText = document.getElementById('fives-score');
 const sixesText = document.getElementById('sixes-score');
+const bonusScoreText = document.getElementById('bonus-score');
+
+const threeKindText = document.getElementById('three-kind-score');
+const fourKindText = document.getElementById('four-kind-score');
+const fullHouseText = document.getElementById('full-house-score');
+const smStraightText = document.getElementById('small-straight-score');
+const lgStraightText = document.getElementById('large-straight-score');
+const yahtzeeText = document.getElementById('yahtzee-score');
+const chanceText = document.getElementById('chance-score');
+
+//counters
+let firstRowSubmitted = 0;
+let totalSubmitted = 0;
 
 // if it is being held and the value of the dice face
 let rollCount = 0;
@@ -91,7 +137,9 @@ let newRoll = function () {
   dice3 = 0;
   dice4 = 0;
   dice5 = 0;
+  bonus();
 };
+
 //start a new game
 btnNewGame.addEventListener('click', function () {
   oneScore = 0;
@@ -100,7 +148,22 @@ btnNewGame.addEventListener('click', function () {
   fourScore = 0;
   fiveScore = 0;
   sixScore = 0;
-  unhold();
+  bonusScore = 0;
+  hold1 = false;
+  hold2 = false;
+  hold3 = false;
+  hold4 = false;
+  hold5 = false;
+  diceEl1.src = `dice-1.png`;
+  diceEl2.src = `dice-2.png`;
+  diceEl3.src = `dice-3.png`;
+  diceEl4.src = `dice-4.png`;
+  diceEl5.src = `dice-5.png`;
+  btnHold1.textContent = 'hold';
+  btnHold2.textContent = 'hold';
+  btnHold3.textContent = 'hold';
+  btnHold4.textContent = 'hold';
+  btnHold5.textContent = 'hold';
   newRoll();
   startMessage.classList.remove('hidden');
   btnNewGame.classList.add('hidden');
@@ -113,6 +176,7 @@ btnNewGame.addEventListener('click', function () {
   foursText.textContent = 'Score: -';
   fivesText.textContent = 'Score: -';
   sixesText.textContent = 'Score: -';
+  bonusScoreText.textContent = 'Score: -';
 });
 
 let roll = function () {
@@ -250,8 +314,11 @@ btnOnes.addEventListener('click', function () {
     totalScore += oneScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
   }
 });
 
@@ -268,8 +335,11 @@ btnTwos.addEventListener('click', function () {
     totalScore += twoScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
   }
 });
 
@@ -286,8 +356,11 @@ btnThrees.addEventListener('click', function () {
     totalScore += threeScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
   }
 });
 
@@ -304,8 +377,11 @@ btnFours.addEventListener('click', function () {
     totalScore += fourScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
   }
 });
 
@@ -322,8 +398,11 @@ btnFives.addEventListener('click', function () {
     totalScore += fiveScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
   }
 });
 
@@ -340,7 +419,243 @@ btnSixes.addEventListener('click', function () {
     totalScore += sixScore;
     totalScoreText.textContent = totalScore;
     rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
     newRoll();
     unhold();
+    bonus();
+  }
+});
+
+//check for bonus
+const bonus = function () {
+  console.log(firstRowSubmitted);
+  let firstRowScore =
+    oneScore + twoScore + threeScore + fourScore + fiveScore + sixScore;
+  if (firstRowSubmitted === 6) {
+    if (firstRowScore > 63) {
+      bonusScore = 35;
+      totalScore += bonusScore;
+      totalScoreText.textContent = totalScore;
+      bonusScoreText.textContent = `score: 35`;
+    } else {
+      bonusScore = 0;
+      bonusScoreText.textContent = `score: 0`;
+    }
+  }
+  console.log(bonusScore);
+};
+
+// 3 of a kind
+btnThreeKind.addEventListener('click', function () {
+  if (!threeKindSubmit && hasRolled) {
+    threeKindSubmit = true;
+    const threeKindArray = makeArray();
+    console.log(threeKindArray);
+
+    if (
+      threeKindArray[0] === threeKindArray[1] &&
+      threeKindArray[1] === threeKindArray[2]
+    ) {
+      threeKindScore = threeKindArray[0] * 3;
+    } else if (
+      threeKindArray[1] === threeKindArray[2] &&
+      threeKindArray[2] === threeKindArray[3]
+    ) {
+      threeKindScore = threeKindArray[1] * 3;
+    } else if (
+      threeKindArray[2] === threeKindArray[3] &&
+      threeKindArray[3] === threeKindArray[4]
+    ) {
+      threeKindScore = threeKindArray[2] * 3;
+    }
+  }
+
+  totalScore += threeKindScore;
+  threeKindText.textContent = threeKindScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+// 4 of a kind
+btnFourKind.addEventListener('click', function () {
+  if (!fourKindSubmit && hasRolled) {
+    fourKindSubmit = true;
+    const fourKindArray = makeArray();
+    console.log(fourKindArray);
+
+    if (
+      fourKindArray[0] === fourKindArray[1] &&
+      fourKindArray[1] === fourKindArray[2] &&
+      fourKindArray[2] === fourKindArray[3]
+    ) {
+      fourKindScore = fourKindArray[0] * 4;
+    } else if (
+      fourKindArray[1] === fourKindArray[2] &&
+      fourKindArray[2] === fourKindArray[3] &&
+      fourKindArray[3] === fourKindArray[4]
+    ) {
+      fourKindScore = fourKindArray[1] * 4;
+    }
+  }
+
+  totalScore += fourKindScore;
+  fourKindText.textContent = fourKindScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+// full house
+btnFullHouse.addEventListener('click', function () {
+  if (!fullHouseSubmit && hasRolled) {
+    fullHouseSubmit = true;
+    const fullHouseArray = makeArray();
+    console.log(fullHouseArray);
+
+    if (
+      fullHouseArray[0] === fullHouseArray[1] &&
+      fullHouseArray[1] === fullHouseArray[2] &&
+      fullHouseArray[3] === fullHouseArray[4] &&
+      fullHouseArray[0] !== fullHouseArray[4]
+    ) {
+      fullHouseScore = 25;
+    } else if (
+      fullHouseArray[0] === fullHouseArray[1] &&
+      fullHouseArray[2] === fullHouseArray[3] &&
+      fullHouseArray[3] === fullHouseArray[4] &&
+      fullHouseArray[0] !== fullHouseArray[4]
+    ) {
+      fullHouseScore = 25;
+    }
+  }
+
+  totalScore += fullHouseScore;
+  fullHouseText.textContent = fullHouseScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+// small straight
+btnSmStraight.addEventListener('click', function () {
+  if (!smStraightSubmit && hasRolled) {
+    smStraightSubmit = true;
+    const smStraightArray = makeArray();
+    console.log(smStraightArray);
+
+    if (
+      smStraightArray[0] === smStraightArray[1] - 1 &&
+      smStraightArray[1] === smStraightArray[2] - 1 &&
+      smStraightArray[2] === smStraightArray[3] - 1
+    ) {
+      smStraightScore = 30;
+    } else if (
+      smStraightArray[1] === smStraightArray[2] - 1 &&
+      smStraightArray[2] === smStraightArray[3] - 1 &&
+      smStraightArray[3] === smStraightArray[4] - 1
+    ) {
+      smStraightScore = 30;
+    }
+  }
+
+  totalScore += smStraightScore;
+  smStraightText.textContent = smStraightScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+// large straight
+btnLgStraight.addEventListener('click', function () {
+  if (!lgStraightSubmit && hasRolled) {
+    lgStraightSubmit = true;
+    const lgStraightArray = makeArray();
+    console.log(lgStraightArray);
+
+    if (
+      lgStraightArray[0] === lgStraightArray[1] - 1 &&
+      lgStraightArray[1] === lgStraightArray[2] - 1 &&
+      lgStraightArray[2] === lgStraightArray[3] - 1 &&
+      lgStraightArray[3] === lgStraightArray[4] - 1
+    ) {
+      lgStraightScore = 40;
+    }
+  }
+
+  totalScore += lgStraightScore;
+  lgStraightText.textContent = lgStraightScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+//yahtzee
+btnYahtzee.addEventListener('click', function () {
+  if (!yahtzeeSubmit && hasRolled) {
+    yahtzeeSubmit = true;
+    const yahtzeeArray = makeArray();
+    console.log(yahtzeeArray);
+
+    if (
+      yahtzeeArray[0] === yahtzeeArray[1] &&
+      yahtzeeArray[1] === yahtzeeArray[2] &&
+      yahtzeeArray[2] === yahtzeeArray[3] &&
+      yahtzeeArray[3] === yahtzeeArray[4]
+    ) {
+      yahtzeeScore = 50;
+    }
+  }
+
+  totalScore += yahtzeeScore;
+  yahtzeeText.textContent = yahtzeeScore;
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  firstRowSubmitted++;
+  totalSubmitted++;
+  newRoll();
+  unhold();
+  bonus();
+});
+
+//yahtzee
+btnChance.addEventListener('click', function () {
+  if (!chanceSubmit && hasRolled) {
+    chanceSubmit = true;
+    const chanceArray = makeArray();
+    for (let i = 0; i < chanceArray.length; i++) {
+      chanceScore += chanceArray[i];
+    }
+
+    totalScore += chanceScore;
+    chanceText.textContent = chanceScore;
+    totalScoreText.textContent = totalScore;
+    rollCount = 3;
+    firstRowSubmitted++;
+    totalSubmitted++;
+    newRoll();
+    unhold();
+    bonus();
   }
 });

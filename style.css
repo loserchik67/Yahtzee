@@ -203,7 +203,7 @@ body {
 }
 
 .total-score-text2 {
-  padding-top: 5px;
+  padding-top: 0px;
   font-size: 50px;
   text-align: center;
   filter: drop-shadow(5px 5px 5px #0000008a);
