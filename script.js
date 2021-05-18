@@ -3,6 +3,7 @@
 const btnRoll = document.getElementById('roll');
 const btnNewGame = document.getElementById('new');
 const startMessage = document.querySelector('.start');
+const won = document.querySelector('.win');
 
 //hold buttons
 const btnHold1 = document.getElementById('hold1');
@@ -137,7 +138,6 @@ let newRoll = function () {
   dice3 = 0;
   dice4 = 0;
   dice5 = 0;
-  bonus();
 };
 
 //start a new game
@@ -149,6 +149,14 @@ btnNewGame.addEventListener('click', function () {
   fiveScore = 0;
   sixScore = 0;
   bonusScore = 0;
+  threeKindScore = 0;
+  fourKindScore = 0;
+  fullHouseScore = 0;
+  smStraightScore = 0;
+  lgStraightScore = 0;
+  yahtzeeScore = 0;
+  chanceScore = 0;
+  totalScore = 0;
   hold1 = false;
   hold2 = false;
   hold3 = false;
@@ -167,6 +175,18 @@ btnNewGame.addEventListener('click', function () {
   newRoll();
   startMessage.classList.remove('hidden');
   btnNewGame.classList.add('hidden');
+  won.classList.add('hidden');
+  diceEl1.classList.remove('hidden');
+  diceEl2.classList.remove('hidden');
+  diceEl3.classList.remove('hidden');
+  diceEl4.classList.remove('hidden');
+  diceEl5.classList.remove('hidden');
+  btnHold1.classList.remove('hidden');
+  btnHold2.classList.remove('hidden');
+  btnHold3.classList.remove('hidden');
+  btnHold4.classList.remove('hidden');
+  btnHold5.classList.remove('hidden');
+  btnRoll.classList.remove('hidden');
 
   //reset scores
   totalScoreText.textContent = 0;
@@ -177,6 +197,28 @@ btnNewGame.addEventListener('click', function () {
   fivesText.textContent = 'Score: -';
   sixesText.textContent = 'Score: -';
   bonusScoreText.textContent = 'Score: -';
+  threeKindText.textContent = 'Score: -';
+  fourKindText.textContent = 'Score: -';
+  fullHouseText.textContent = 'Score: -';
+  smStraightText.textContent = 'Score: -';
+  lgStraightText.textContent = 'Score: -';
+  yahtzeeText.textContent = 'Score: -';
+  chanceText.textContent = 'Score: -';
+
+  // reset holds
+  oneSubmit = false;
+  twoSubmit = false;
+  threeSubmit = false;
+  fourSubmit = false;
+  fiveSubmit = false;
+  sixSubmit = false;
+  threeKindSubmit = false;
+  fourKindSubmit = false;
+  fullHouseSubmit = false;
+  smStraightSubmit = false;
+  lgStraightSubmit = false;
+  yahtzeeSubmit = false;
+  chanceSubmit = false;
 });
 
 let roll = function () {
@@ -207,6 +249,23 @@ let roll = function () {
   }
 };
 
+let win = function () {
+  if (totalSubmitted === 13) {
+    won.classList.remove('hidden');
+    diceEl1.classList.add('hidden');
+    diceEl2.classList.add('hidden');
+    diceEl3.classList.add('hidden');
+    diceEl4.classList.add('hidden');
+    diceEl5.classList.add('hidden');
+    btnHold1.classList.add('hidden');
+    btnHold2.classList.add('hidden');
+    btnHold3.classList.add('hidden');
+    btnHold4.classList.add('hidden');
+    btnHold5.classList.add('hidden');
+    btnRoll.classList.add('hidden');
+  }
+};
+
 //create and sort an array
 const makeArray = function () {
   //populate the array with dice values
@@ -215,6 +274,16 @@ const makeArray = function () {
   let sortedArray = diceArray.sort();
   console.log(sortedArray);
   return sortedArray;
+};
+
+const submit = function () {
+  totalScoreText.textContent = totalScore;
+  rollCount = 3;
+  totalSubmitted++;
+  unhold();
+  newRoll();
+  bonus();
+  win();
 };
 
 btnRoll.addEventListener('click', function () {
@@ -312,13 +381,8 @@ btnOnes.addEventListener('click', function () {
     }
     onesText.textContent = `Score: ${oneScore}`;
     totalScore += oneScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -333,13 +397,8 @@ btnTwos.addEventListener('click', function () {
     }
     twosText.textContent = `Score: ${twoScore}`;
     totalScore += twoScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -354,13 +413,8 @@ btnThrees.addEventListener('click', function () {
     }
     threesText.textContent = `Score: ${threeScore}`;
     totalScore += threeScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -375,13 +429,8 @@ btnFours.addEventListener('click', function () {
     }
     foursText.textContent = `Score: ${fourScore}`;
     totalScore += fourScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -396,13 +445,8 @@ btnFives.addEventListener('click', function () {
     }
     fivesText.textContent = `Score: ${fiveScore}`;
     totalScore += fiveScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -417,13 +461,8 @@ btnSixes.addEventListener('click', function () {
     }
     sixesText.textContent = `Score: ${sixScore}`;
     totalScore += sixScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
     firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
 
@@ -451,8 +490,6 @@ btnThreeKind.addEventListener('click', function () {
   if (!threeKindSubmit && hasRolled) {
     threeKindSubmit = true;
     const threeKindArray = makeArray();
-    console.log(threeKindArray);
-
     if (
       threeKindArray[0] === threeKindArray[1] &&
       threeKindArray[1] === threeKindArray[2]
@@ -469,17 +506,11 @@ btnThreeKind.addEventListener('click', function () {
     ) {
       threeKindScore = threeKindArray[2] * 3;
     }
-  }
 
-  totalScore += threeKindScore;
-  threeKindText.textContent = threeKindScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += threeKindScore;
+    threeKindText.textContent = `Score: ${threeKindScore}`;
+    submit();
+  }
 });
 
 // 4 of a kind
@@ -502,17 +533,11 @@ btnFourKind.addEventListener('click', function () {
     ) {
       fourKindScore = fourKindArray[1] * 4;
     }
-  }
 
-  totalScore += fourKindScore;
-  fourKindText.textContent = fourKindScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += fourKindScore;
+    fourKindText.textContent = fourKindScore;
+    submit();
+  }
 });
 
 // full house
@@ -537,17 +562,11 @@ btnFullHouse.addEventListener('click', function () {
     ) {
       fullHouseScore = 25;
     }
-  }
 
-  totalScore += fullHouseScore;
-  fullHouseText.textContent = fullHouseScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += fullHouseScore;
+    fullHouseText.textContent = fullHouseScore;
+    submit();
+  }
 });
 
 // small straight
@@ -557,30 +576,51 @@ btnSmStraight.addEventListener('click', function () {
     const smStraightArray = makeArray();
     console.log(smStraightArray);
 
+    //last one
     if (
       smStraightArray[0] === smStraightArray[1] - 1 &&
       smStraightArray[1] === smStraightArray[2] - 1 &&
       smStraightArray[2] === smStraightArray[3] - 1
     ) {
       smStraightScore = 30;
-    } else if (
+    }
+    // first one
+    else if (
       smStraightArray[1] === smStraightArray[2] - 1 &&
       smStraightArray[2] === smStraightArray[3] - 1 &&
       smStraightArray[3] === smStraightArray[4] - 1
     ) {
       smStraightScore = 30;
     }
-  }
+    //2nd one
+    else if (
+      smStraightArray[0] === smStraightArray[2] - 1 &&
+      smStraightArray[2] === smStraightArray[3] - 1 &&
+      smStraightArray[3] === smStraightArray[4] - 1
+    ) {
+      smStraightScore = 30;
+    }
+    //3rd one
+    else if (
+      smStraightArray[0] === smStraightArray[1] - 1 &&
+      smStraightArray[1] === smStraightArray[3] - 1 &&
+      smStraightArray[3] === smStraightArray[4] - 1
+    ) {
+      smStraightScore = 30;
+    }
+    //4th one
+    else if (
+      smStraightArray[0] === smStraightArray[1] - 1 &&
+      smStraightArray[1] === smStraightArray[2] - 1 &&
+      smStraightArray[2] === smStraightArray[4] - 1
+    ) {
+      smStraightScore = 30;
+    }
 
-  totalScore += smStraightScore;
-  smStraightText.textContent = smStraightScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += smStraightScore;
+    smStraightText.textContent = smStraightScore;
+    submit();
+  }
 });
 
 // large straight
@@ -598,17 +638,11 @@ btnLgStraight.addEventListener('click', function () {
     ) {
       lgStraightScore = 40;
     }
-  }
 
-  totalScore += lgStraightScore;
-  lgStraightText.textContent = lgStraightScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += lgStraightScore;
+    lgStraightText.textContent = lgStraightScore;
+    submit();
+  }
 });
 
 //yahtzee
@@ -616,8 +650,6 @@ btnYahtzee.addEventListener('click', function () {
   if (!yahtzeeSubmit && hasRolled) {
     yahtzeeSubmit = true;
     const yahtzeeArray = makeArray();
-    console.log(yahtzeeArray);
-
     if (
       yahtzeeArray[0] === yahtzeeArray[1] &&
       yahtzeeArray[1] === yahtzeeArray[2] &&
@@ -626,17 +658,11 @@ btnYahtzee.addEventListener('click', function () {
     ) {
       yahtzeeScore = 50;
     }
-  }
 
-  totalScore += yahtzeeScore;
-  yahtzeeText.textContent = yahtzeeScore;
-  totalScoreText.textContent = totalScore;
-  rollCount = 3;
-  firstRowSubmitted++;
-  totalSubmitted++;
-  newRoll();
-  unhold();
-  bonus();
+    totalScore += yahtzeeScore;
+    yahtzeeText.textContent = yahtzeeScore;
+    submit();
+  }
 });
 
 //yahtzee
@@ -650,12 +676,6 @@ btnChance.addEventListener('click', function () {
 
     totalScore += chanceScore;
     chanceText.textContent = chanceScore;
-    totalScoreText.textContent = totalScore;
-    rollCount = 3;
-    firstRowSubmitted++;
-    totalSubmitted++;
-    newRoll();
-    unhold();
-    bonus();
+    submit();
   }
 });
