@@ -157,6 +157,8 @@ btnNewGame.addEventListener('click', function () {
   yahtzeeScore = 0;
   chanceScore = 0;
   totalScore = 0;
+  firstRowSubmitted = 0;
+  totalSubmitted = 0;
   hold1 = false;
   hold2 = false;
   hold3 = false;
